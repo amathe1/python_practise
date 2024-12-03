@@ -1,0 +1,17 @@
+def main():
+    print("Hello {}".format("Arun"))
+    print("Hello {0} and {1}".format("Arun", "Wine"))
+    print("Hello {1} and {0}".format("Arun", "Wine"))
+    print("The temperature is {}".format(31))
+    print("The temperature is {:.2f}".format(31))
+    print("Number of units are {units}".format(units=46))
+    print()
+    print("Hello {name}. The temperature is {temperature:.2f} celcius today".format(name="Arun", temperature=34.123456))
+    print()
+    print("Sun is {distance:,} miles away from earth".format(distance=93000000000))
+    print()
+    print("Arun & {:>10}".format("zoe"))
+    print()
+    print("We have {:.0%} fuel left".format(0.25))
+
+main()
