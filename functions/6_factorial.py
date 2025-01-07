@@ -14,6 +14,16 @@ main()
 
 """
 
+
+# factorial of a number (applicable to only positive numbers)
+# n! = n * (n - 1) * (n - 2) * .... 3 * 2 *1
+
+# Ex : 5! = 5 * 4 * 3 * 2 * 1
+# 5! = 120
+
+# Factorial of zero is 1.
+# 0! = 1 
+
 def recursive_factorial(n):
     if n == 1:
         return n
