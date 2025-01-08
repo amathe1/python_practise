@@ -10,13 +10,12 @@ when user don't know exactly how many arguments can enter, this is to handle suc
 
 
 
-def describe_person(name, *attributes):
+def describe_person(name, *args):
     print(name)
-   # print(type(attributes))
+    # print(type(attributes))
 
-
-    for attribute in attributes:
-        print(attribute)
+    for arg in args:
+        print(arg)
 
 
 
@@ -26,5 +25,6 @@ def main():
     describe_person("CBN", "Visionary", "Growth Oriented")
     print()
     describe_person("Jagan")
+   
 
 main()

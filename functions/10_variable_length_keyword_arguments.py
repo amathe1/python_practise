@@ -1,9 +1,9 @@
 
 
-def describe_city(**attributes):
+def describe_city(**kwargs):
 
-    for property in attributes:
-        print(property, ": ", attributes[property])
+    for property in kwargs:
+        print(property, ": ", kwargs[property])
         
     print()
 
@@ -14,3 +14,5 @@ def main():
     describe_city(population=10000000, is_rainy=False)
 
 main()
+
+

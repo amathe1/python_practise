@@ -6,6 +6,10 @@ def ask_user_status():
     if response == "OK" or response == "ok":
         print("Excellent!")
     else:
-        print("On no....")
+        print("Oh no...!")
 
-ask_user_status()
+
+def main():
+    ask_user_status()
+
+main()

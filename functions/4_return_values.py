@@ -2,7 +2,6 @@
 1. Python don't allow 2 functions with same name
 2. Some programming languages like Java allows it (consider parameters are different)
 
-
 """
 
 
