@@ -40,7 +40,7 @@ def main():
     print("Bytes : ", num1.nbytes)
     print()
 
-
+    # # creating a two dimentional array/list using 'np'
     num2 = np.array([[1, 2], [3, 4], [5, 6]], dtype=int)
 
     print(num2)
