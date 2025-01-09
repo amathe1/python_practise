@@ -1,6 +1,6 @@
 """
 
-Pandas is a Python package that provides data structures and tools for data analysis and manipulation
+Pandas is a Python package that provides data structures and tools for data analysis and manipulation.
 
 -> pip3 list
 Package            Version
