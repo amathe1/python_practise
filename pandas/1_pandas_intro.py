@@ -62,16 +62,21 @@ import pandas as pd
 
 def main():
     df = pd.read_csv('/Users/Arunkumar_Mathe/Documents/python_practise/pandas/exercises.csv', sep=',', index_col=0)
+    print()
+    print("====== DATA FRAME ======")
     print(df)
     print()
+    print("=== Below are columns of Data Frame ===")
     print(df.columns)
     
     print()
     # It will print first 2 lines in data frame
+    print("=========== HEAD of DATA FRAME ===========")
     print(df.head(2))
 
     print()
     # It will print last 2 lines in data frame
+    print("=========== TAIL of DATA FRAME ===========")
     print(df.tail(2))
 
 if __name__ == "__main__":

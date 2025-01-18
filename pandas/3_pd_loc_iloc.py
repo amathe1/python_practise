@@ -1,6 +1,16 @@
 """
 Let's look at getting ranges of rows and columns
 
+     Pullups  Pushups  Crunches
+Day                            
+Mon       10       10         5
+Tue       11        9         5
+Wed       10        6         8
+Thu       14       11         5
+Fri        8       11         3
+Sat       20       10         9
+Sun        6        7         8
+
 """
 
 
@@ -15,7 +25,7 @@ def main():
     print()
 
     # Using names of rows(instead of index) 
-    # notice that if you use named index, 'Fri' is also included (for int it will do n-1)
+    # notice that if you use named index, 'Fri' is also included (but for int it will do n-1)
     print(df.loc['Mon':'Fri'])
 
     print()

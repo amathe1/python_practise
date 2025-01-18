@@ -18,7 +18,7 @@ def main():
     print(df)
     print()
 
-    # Multiplying entire data frame with o.5
+    # Multiplying entire data frame with 0.5
     df = df * 0.5
     print(df)
 

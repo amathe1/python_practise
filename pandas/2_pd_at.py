@@ -2,6 +2,17 @@
 
 Let's look at getting and setting values in a pandas data frame
 
+====== DATA FRAME ======
+     Pullups  Pushups  Crunches
+Day                            
+Mon       10       10         5
+Tue       11        9         5
+Wed       10        6         8
+Thu       14       11         5
+Fri        8       11         3
+Sat       20       10         9
+Sun        6        7         8
+
 """
 
 
@@ -18,7 +29,7 @@ def main():
 
     print()
     # printing value based on rown & column values
-    print(df.iat[1, 0]) # index 1 i.e., Tuesday, index 0 ie., Pullups ==> value must be '11'
+    print(df.iat[1, 0]) # row index is 1 i.e., Tuesday; and column index 0 ie., Pullups ==> value must be '11'
 
     print()
     print(df.at['Sun', 'Crunches'])
@@ -27,6 +38,8 @@ def main():
     #Updating values based on rown & column names
     df.at['Sun', 'Crunches'] = 80
     print(df.at['Sun', 'Crunches'])
+    print()
+    print(df)
 
 if __name__ == "__main__":
     main()
