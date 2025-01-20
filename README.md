@@ -1,4 +1,2 @@
-Please find the examples of basic concepts in Python.
-I have created a seperate package for each conecpt.
-Documentation is also clearely updated with proper comments above code.
-I will keep referring back to this code to fine tune it further.
+Please find the programs with clear documentation on different concepts in Python.
+I will updating this code base consistantly with more information related to Python.
