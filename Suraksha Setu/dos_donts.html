@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="croppedimage.png">
+    <title>Safe Places Updates</title>
+    <style>
+        body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+}
+
+.form-container {
+    width: 50%;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.form-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.form-container h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #0f2027;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+.form-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-container input, .form-container textarea, .form-container select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-container input:focus, .form-container textarea:focus, .form-container select:focus {
+    border-color: #007acc;
+    box-shadow: 0 0 8px rgba(0, 122, 204, 0.25);
+}
+
+.form-container input[type="date"] {
+    padding: 10px;
+}
+
+.form-container button {
+    font-size: 18px;
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.form-container button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: -1;
+    transform: skewX(-75deg);
+    transition: all 0.2s;
+}
+
+.form-container button:hover:before {
+    transform: skewX(0);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.form-container button:hover {
+    background-color: #005f99;
+    box-shadow: 0 4px 15px rgba(0, 95, 153, 0.4);
+    transform: translateY(-3px);
+}
+
+.back-button,
+.back-button *,
+.back-button:after,
+.back-button:before,
+.back-button:after,
+.back-button:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+
+.back-button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: transparent;
+  color: #007acc;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 100%;
+  font-weight: 900;
+  line-height: 1.5;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  text-transform: uppercase;
+  background-clip: content-box;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: block;
+  height: 60px;
+  width: 60px;
+  padding: 0;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  transition: 0.2s;
+}
+
+.back-button:disabled {
+  cursor: default;
+}
+
+.back-button:-moz-focusring {
+  outline: auto;
+}
+
+.back-button svg {
+  vertical-align: middle;
+  --size: 35px;
+  fill: #007acc;
+  display: block;
+  height: var(--size);
+  left: calc(50% - var(--size) / 2);
+  position: absolute;
+  top: calc(50% - var(--size) / 2);
+  width: var(--size);
+  transition: fill 0.2s;
+}
+
+.back-button:hover {
+  background: hsla(0, 0%, 100%, 0.2);
+}
+
+.back-button:hover svg {
+  fill: #005f99;
+}
+
+.back-button:before {
+  border: 2px solid #007acc;
+  border-radius: 50%;
+  content: "";
+  inset: 1px;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transform: scale(2);
+  transition: 0.2s;
+}
+
+.back-button:hover:before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+    </style>
+</head>
+<body>
+    <button class="back-button" id="back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="40" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+        </svg>
+    </button>
+    <div class="form-container">
+        <h2>Edit Alert</h2>
+        <form id="alert-form" method="post" action="save_alert.php">
+            <label for="alert">Alert</label>
+            <select id="alert" name="alert">
+                <option value="select">Select</option>
+                <option value="Earthquake">Earthquake</option>
+                <option value="Flood">Flood</option>
+                <option value="Cyclone">Cyclone</option>
+                <option value="Hurricane">Hurricane</option>
+                <option value="Tsunami">Tsunami</option>
+            </select>
+            <label for="issuedBy">Issued By</label>
+            <select id="issuedBy" name="issuedBy">
+                <option value="select">Select</option>
+                <option value="State Government">State Government</option>
+                <option value="Suraksha Setu">Suraksha Setu</option>
+            </select>
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location">
+            <label for="safeplaces">Safe Places</label>
+            <input type="text" id="safeplaces" name="safeplaces">
+            <label for="intensity">Intensity</label>
+            <input type="text" id="intensity" name="intensity">
+            <label for="validUntil">Valid Until</label>
+            <input type="date" id="validUntil" name="validUntil">
+            <label for="description">Description</label>
+            <textarea id="description" name="description"></textarea>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById("back").addEventListener("click", function() {
+            window.location.href = "adminpanel.html"; 
+        });
+    </script>
+</body>
+</html>

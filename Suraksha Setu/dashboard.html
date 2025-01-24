@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suraksha Setu</title>
+    <link rel="icon" type="image/png" href="croppedimage.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://media.istockphoto.com/id/1402835926/vector/coordinated-response-blue-gradient-concept-icon.jpg?s=612x612&w=0&k=20&c=Prrc4uH4RqGQ1vtxe3SsTu5km3rp-8LMMuL7PhY7W1E=');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background-color: #007acc;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Ensure header is above other content */
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            height: 40px;
+            width: 40px;
+        }
+
+        h1 {
+            color: white;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .logout-button {
+            background-color: #007acc;
+            color: white;
+            border: none;
+            padding: 10px 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .logout-button:hover,
+        .logout-button:focus {
+            background-color: #e64a19;
+            outline: none;
+        }
+
+        main {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            padding: 4px;
+            padding-top: 20px; /* Adjust top padding to create space for alert */
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px; /* Gap between the buttons */
+            margin-top: 20px; /* Adjust margin as needed */
+        }
+
+        .main-button {
+            width: 100px;
+            height: 100px;
+            font-size: 18px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-button:hover,
+        .main-button:focus {
+            background-color: #0056b3;
+            outline: none;
+        }
+
+        .square-button {
+            width: 250px;
+            height: 60px;
+            font-size: 18px;
+            color: white;
+            background-color: #007acc;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .square-button:hover,
+        .square-button:focus {
+            background-color: #e64a19;
+            outline: none;
+        }
+
+        /* Alert Message Styles */
+        .alert-message {
+            position: absolute;
+            top: 21%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%);
+            width: 80%; /* Adjust width as needed */
+            max-width: 300px;
+            background-color: whitesmoke;
+            border: 2px solid #007acc;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000; /* Ensure alert is above other content */
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .main-button {
+                margin-bottom: 10px;
+            }
+
+            .square-button {
+                width: 80%;
+                height: 70;
+                padding: 2px 0;
+                border-radius: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="mainimage2.png" alt="Logo" class="logo">
+        </div>
+        <h1>Suraksha Setu</h1>
+        <button class="logout-button" id="logoutButton">Logout</button>
+    </header>
+    <main>
+        <div class="button-container">
+            <button class="main-button" id="drcs">DRCS</button>
+            <button class="main-button" id="di1">DI1</button>
+            <button class="square-button" id="offlineButton">Offline Assistance</button>
+        </div>
+    </main>
+
+    <!-- Alert Message -->
+    <div class="alert-message" id="alertMessage">
+        <strong>Alert from: Suraksha Setu Team</strong><br>
+        <span id="alertType"></span><br>
+        <span id="alertDate"></span><br>
+        <span id="alertTime"></span><br>
+        <span id="alertArea"></span>
+    </div>
+
+    <script>
+     function displayAlert(alertType, alertDate, alertTime, alertArea) {
+    const alertMessage = document.getElementById('alertMessage');
+    const alertTypeElement = document.getElementById('alertType');
+    const alertDateElement = document.getElementById('alertDate');
+    const alertTimeElement = document.getElementById('alertTime');
+    const alertAreaElement = document.getElementById('alertArea');
+
+    alertTypeElement.textContent = `Type of Alert: ${alertType}`;
+    alertDateElement.textContent = `Date: ${alertDate}`;
+    alertTimeElement.textContent = `Time: ${alertTime}`;
+    alertAreaElement.textContent = `Area to be affected: ${alertArea}`;
+
+    alertMessage.style.display = 'block';
+}
+
+
+        function fetchAlerts() {
+            fetch('fetch_alerts.php')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.success) {
+                        data.alerts.forEach(alert => {
+                            displayAlert(alert.alertType, alert.alertDate, alert.alertTime, alert.alertArea);
+                        });
+                    } else {
+                        console.error('Error fetching alerts:', data.message);
+                    }
+                })
+                .catch(error => console.error('Error fetching alerts:', error));
+        }
+
+        setInterval(fetchAlerts, 5000);
+
+        fetchAlerts();
+
+        setTimeout(() => {
+            displayAlert('Emergency', '0000-00-00', '00:00:00', '###');
+        }, 5000);
+
+        document.getElementById("logoutButton").addEventListener("click", function() {
+            window.location.href = "login.php";
+        });
+
+        document.getElementById("di1").addEventListener("click", function() {
+            window.location.href = "di1.html";
+        });
+        document.getElementById("offlineButton").addEventListener("click", function() {
+            window.location.href = "raksha_samarthya.html";
+        });
+
+        document.getElementById("drcs").addEventListener("click", function() {
+            window.location.href = "drcs.html";
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const recognition = new webkitSpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.continuous = false;
+            
+            recognition.onresult = function(event) {
+                const command = event.results[0][0].transcript.toLowerCase();
+                
+                if (command === 'help') {
+                    // Request permissions for location, camera, and microphone
+                    navigator.permissions.query({ name: 'geolocation' }).then(function(result) {
+                        if (result.state === 'granted') {
+                            // Permission already granted
+                            window.location.href = "di1.html"; // Redirect to D1 page
+                        } else {
+                            // Ask for permission
+                            navigator.geolocation.getCurrentPosition(function() {
+                                window.location.href = "di1.html"; // Redirect to D1 page
+                            }, function() {
+                                alert('Permission denied or error occurred.');
+                            });
+                        }
+                    });
+                    
+                    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(function() {
+                        window.location.href = "di1.html"; // Redirect to D1 page
+                    }).catch(function() {
+                        alert('Permission denied or error occurred.');
+                    });
+                }
+            };
+            
+            recognition.start();
+        });
+    </script>
+</body>
+</html>

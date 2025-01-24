@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funding Page</title>
+    <link rel="icon" type="image/png" href="croppedimage.png">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            transition: background 0.3s ease;
+        }
+    
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: transparent;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background 0.3s ease;
+        }
+    
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: #f5f7fa;
+        }
+    
+        h1, h2 {
+            text-align: center;
+            color: #444;
+            margin-bottom: 20px;
+            font-weight: bolder;
+            letter-spacing: 0.7px;
+            font-size: 1.4rem;
+            transition: color 0.3s ease;
+        }
+    
+        h1:hover, h2:hover {
+            color: #007bff;
+        }
+    
+        .dropdowns {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+    
+        select {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            outline: none;
+            color: #007bff;
+        }
+    
+        select:hover, select:focus {
+            border-color: #007bff;
+            box-shadow: 0 5px 20px rgba(0, 123, 255, 0.3);
+        }
+    
+        option {
+            color: #007bff;
+        }
+    
+        .funds-display {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background 0.3s ease;
+        }
+    
+        .funds-display:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: #f0f2f5;
+        }
+    
+        .funds-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+    
+        .fund-item {
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+    
+        .fund-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    
+        p {
+            font-size: 16px;
+            color: #555;
+            margin: 0;
+            transition: color 0.3s ease;
+        }
+    
+        p:hover {
+            color: #333;
+        }
+    
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    
+        .container, .funds-display, .funds-items {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: rgb(0, 0, 0);
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+    
+        button:hover {
+            background-color: #b3b6b9;
+            transform: translateY(-2px);
+        }
+    
+        .back-button {
+            position: fixed;
+            top: 15px;
+            left: 10px;
+            padding: 10px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 9999;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+    
+        .back-button:hover {
+            transform: scale(1.1);
+            background-color: rgba(0, 122, 204, 0.1);
+        }
+    
+        .back-button:hover svg {
+            fill: #08090a;
+        }
+    
+        .total-funds {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+    
+        .total-funds:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    
+        .total-funds p {
+            font-size: 20px;
+            font-weight: bold;
+            color: #007bff;
+        }
+    
+        @media (min-width: 768px) {
+            .container {
+                width: 75%;
+                max-width: 900px;
+                padding: 40px;
+                border-radius: 50px;
+            }
+    
+            .funds-display {
+                padding: 30px;
+                border-radius: 50px;
+            }
+    
+            .fund-item {
+                padding: 20px;
+            }
+    
+            .total-funds {
+                border-radius: 50px;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Funds Dashboard</h1>
+        <div class="dropdowns">
+            <select id="stateDropdown" onchange="updateDistricts()">
+                <option value="">Select State</option>
+            </select>
+            <select id="districtDropdown" onchange="displayFunds()">
+                <option value="">Select District</option>
+            </select>
+        </div>
+        <div class="funds-display">
+            <h2>Area-wise Funds</h2>
+            <div class="funds-items">
+                <div class="fund-item">
+                    <p id="funds">Select an area to see the funds</p>
+                </div>
+                <div class="fund-item">
+                    <p id="population">Select an area to see the population</p>
+                </div>
+                <div class="fund-item">
+                    <p id="fundsClothes">Funds for Clothes: ₹0</p>
+                </div>
+                <div class="fund-item">
+                    <p id="fundsFood">Funds for Food: ₹0</p>
+                </div>
+                <div class="fund-item">
+                    <p id="fundsMedicine">Funds for Medicine: ₹0</p>
+                </div>
+            </div>
+        </div>
+        <div class="total-funds">
+            <h2>Total Funds for the Country</h2>
+            <p id="totalFunds">₹0</p>
+        </div>
+    </div>
+    <button class="back-button" id="back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+        </svg>
+    </button>
+    <script>
+        const data = {
+            "India": {
+                "Andhra Pradesh": {
+                    "Guntur": { "funds": 100000, "population": 4800000 },
+                    "Krishna": { "funds": 150000, "population": 4529000 }
+                },
+                "Tamilnadu": {
+                    "Chennai": { "funds": 200000, "population": 7100000 },
+                    "Coimbatore": { "funds": 250000, "population": 3450000 }
+                },
+                "Telangana": {
+                    "Hyderabad": { "funds": 300000, "population": 6800000 },
+                    "Warangal": { "funds": 350000, "population": 3600000 }
+                }
+            }
+        };
+
+        const stateDropdown = document.getElementById('stateDropdown');
+const districtDropdown = document.getElementById('districtDropdown');
+const fundsDisplay = document.getElementById('funds');
+const populationDisplay = document.getElementById('population');
+const fundsClothesDisplay = document.getElementById('fundsClothes');
+const fundsFoodDisplay = document.getElementById('fundsFood');
+const fundsMedicineDisplay = document.getElementById('fundsMedicine');
+const totalFundsDisplay = document.getElementById('totalFunds');
+
+const CLOTHES_PERCENTAGE = 0.4;
+const FOOD_PERCENTAGE = 0.35;
+const MEDICINE_PERCENTAGE = 0.25;
+
+window.onload = function() {
+    populateDropdown(stateDropdown, Object.keys(data["India"]));
+    displayTotalFunds();
+};
+
+function populateDropdown(dropdown, options) {
+    dropdown.innerHTML = '<option value="">Select</option>';
+    options.forEach(option => {
+        const opt = document.createElement('option');
+        opt.value = option;
+        opt.innerHTML = option;
+        dropdown.appendChild(opt);
+    });
+}
+
+function updateDistricts() {
+    const state = stateDropdown.value;
+    if (state) {
+        populateDropdown(districtDropdown, Object.keys(data["India"][state]));
+    } else {
+        districtDropdown.innerHTML = '<option value="">Select District</option>';
+    }
+    resetDisplays();
+}
+
+function displayFunds() {
+    const state = stateDropdown.value;
+    const district = districtDropdown.value;
+    if (state && district) {
+        const { funds, population } = data["India"][state][district];
+        const fundsClothes = funds * CLOTHES_PERCENTAGE;
+        const fundsFood = funds * FOOD_PERCENTAGE;
+        const fundsMedicine = funds * MEDICINE_PERCENTAGE;
+
+        fundsDisplay.innerHTML = `Funds for ${district}: ₹${funds}`;
+        populationDisplay.innerHTML = `Population of ${district}: ${population}`;
+        fundsClothesDisplay.innerHTML = `Funds for Clothes: ₹${fundsClothes}`;
+        fundsFoodDisplay.innerHTML = `Funds for Food: ₹${fundsFood}`;
+        fundsMedicineDisplay.innerHTML = `Funds for Medicine: ₹${fundsMedicine}`;
+    } else {
+        resetDisplays();
+    }
+}
+
+function displayTotalFunds() {
+    let totalFunds = 0; // Adjusted to start at 0
+    for (const state in data["India"]) {
+        for (const district in data["India"][state]) {
+            totalFunds += data["India"][state][district].funds;
+        }
+    }
+    totalFundsDisplay.innerHTML = `₹${totalFunds}`;
+}
+
+function resetDisplays() {
+    fundsDisplay.innerHTML = 'Select an area to see the funds';
+    populationDisplay.innerHTML = 'Select an area to see the population';
+    fundsClothesDisplay.innerHTML = 'Funds for Clothes: ₹0';
+    fundsFoodDisplay.innerHTML = 'Funds for Food: ₹0';
+    fundsMedicineDisplay.innerHTML = 'Funds for Medicine: ₹0';
+}
+
+stateDropdown.addEventListener('change', updateDistricts);
+districtDropdown.addEventListener('change', displayFunds);
+
+document.getElementById("back").addEventListener("click", function() {
+    window.location.href = "adminpanel.html"; 
+});
+
+    </script>
+</body>
+</html>

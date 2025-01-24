@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert History</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="croppedimage.png">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #007acc;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007acc;
+            color: white;
+        }
+
+        .back-button {
+            border: 1px solid #007acc;
+            color: #007acc;
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button i {
+            margin: 0;
+        }
+        
+        button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="window.location.href = 'adminpanel.html'">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+    <h1>Alert History</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Activation Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="historyTableBody">
+            <!-- History records will be inserted dynamically here -->
+        </tbody>
+    </table>
+
+    <script>
+        function loadAlertHistory() {
+            fetch('fetch_alert_history.php')
+                .then(response => response.json())
+                .then(data => {
+                    const historyTableBody = document.getElementById("historyTableBody");
+                    historyTableBody.innerHTML = "";
+
+                    if (data.error) {
+                        console.error('Error fetching alert history:', data.error);
+                        return;
+                    }
+
+                    if (data.message) {
+                        const row = document.createElement("tr");
+                        const cell = document.createElement("td");
+                        cell.colSpan = 3;
+                        cell.textContent = data.message;
+                        row.appendChild(cell);
+                        historyTableBody.appendChild(row);
+                        return;
+                    }
+
+                    data.forEach((record) => {
+                        const row = document.createElement("tr");
+
+                        const locationCell = document.createElement("td");
+                        locationCell.textContent = `Lat: ${record.lat}, Lng: ${record.lng}`;
+                        row.appendChild(locationCell);
+
+                        const timeCell = document.createElement("td");
+                        timeCell.textContent = record.alert_time;
+                        row.appendChild(timeCell);
+
+                        const actionCell = document.createElement("td");
+                        const deleteButton = document.createElement("button");
+                        deleteButton.textContent = "Delete";
+                        deleteButton.onclick = () => deleteHistoryRecord(record.id); // Pass the record id
+                        actionCell.appendChild(deleteButton);
+                        row.appendChild(actionCell);
+
+                        historyTableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error fetching alert history:', error));
+        }
+
+        function deleteHistoryRecord(id) {
+            fetch('delete_alert_record.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `id=${id}`,
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                loadAlertHistory(); // Reload history after deletion
+            })
+            .catch(error => console.error('Error deleting alert record:', error));
+        }
+
+        // Load alert history when the page loads
+        window.onload = loadAlertHistory;
+    </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+[24-Jun-2024 08:15:40 Europe/Berlin] Received request for disease: fever
+[24-Jun-2024 08:15:40 Europe/Berlin] Disease ID found: 1
+[24-Jun-2024 08:15:40 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[24-Jun-2024 08:15:40 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[24-Jun-2024 08:41:19 Europe/Berlin] Received request for disease: hello hello
+[24-Jun-2024 08:41:35 Europe/Berlin] Received request for disease: fever fever
+[24-Jun-2024 08:41:40 Europe/Berlin] Received request for disease: fever
+[24-Jun-2024 08:41:40 Europe/Berlin] Disease ID found: 1
+[24-Jun-2024 08:41:40 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[24-Jun-2024 08:41:40 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[24-Jun-2024 08:42:00 Europe/Berlin] Received request for disease: diarrhoea
+[24-Jun-2024 08:42:00 Europe/Berlin] Disease ID found: 10
+[24-Jun-2024 08:42:00 Europe/Berlin] Symptoms retrieved: ["bloating","nausea","Bellly pain"]
+[24-Jun-2024 08:42:00 Europe/Berlin] Medications retrieved: ["Drink ORS","loperamide","Bismuth Subsalicylate","Eat Bananas"]
+[24-Jun-2024 08:42:23 Europe/Berlin] Received request for disease: malaria
+[24-Jun-2024 08:42:23 Europe/Berlin] Disease ID found: 7
+[24-Jun-2024 08:42:23 Europe/Berlin] Symptoms retrieved: ["Fever","Headache","Nausea","diarrhoea"]
+[24-Jun-2024 08:42:23 Europe/Berlin] Medications retrieved: ["Consult a Doctor","chloroquine","Malarone","Take Rest"]
+[24-Jun-2024 08:43:03 Europe/Berlin] Received request for disease: dengue
+[24-Jun-2024 08:43:03 Europe/Berlin] Disease ID found: 9
+[24-Jun-2024 08:43:03 Europe/Berlin] Symptoms retrieved: ["vomitings","joint pains","Headache","High fever"]
+[24-Jun-2024 08:43:03 Europe/Berlin] Medications retrieved: ["Consult a doctor","Acetaminophen","Aspirin","Eat Leafy Vegetables"]
+[24-Jun-2024 09:04:14 Europe/Berlin] Received request for disease: i am sufferin with fever
+[24-Jun-2024 09:46:59 Europe/Berlin] Received request for disease: fever
+[24-Jun-2024 09:46:59 Europe/Berlin] Disease ID found: 1
+[24-Jun-2024 09:46:59 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[24-Jun-2024 09:46:59 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[24-Jun-2024 09:47:19 Europe/Berlin] Received request for disease: agree with the symptoms
+[24-Jun-2024 09:50:47 Europe/Berlin] Received request for disease: hi hi
+[25-Jun-2024 15:12:01 Europe/Berlin] Received request for disease: fever
+[25-Jun-2024 15:12:01 Europe/Berlin] Disease ID found: 1
+[25-Jun-2024 15:12:01 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[25-Jun-2024 15:12:01 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[25-Jun-2024 17:44:48 Europe/Berlin] Received request for disease: fever
+[25-Jun-2024 17:44:48 Europe/Berlin] Disease ID found: 1
+[25-Jun-2024 17:44:48 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[25-Jun-2024 17:44:48 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[25-Jun-2024 17:46:14 Europe/Berlin] Received request for disease: fever
+[25-Jun-2024 17:46:14 Europe/Berlin] Disease ID found: 1
+[25-Jun-2024 17:46:14 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[25-Jun-2024 17:46:14 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[25-Jun-2024 17:47:11 Europe/Berlin] Received request for disease: cold
+[25-Jun-2024 17:47:11 Europe/Berlin] Disease ID found: 2
+[25-Jun-2024 17:47:11 Europe/Berlin] Symptoms retrieved: ["Loss of smell","Sore throat","Coughing","Sneezing"]
+[25-Jun-2024 17:47:11 Europe/Berlin] Medications retrieved: ["Antihistamines","Decongestants","Cough suppressants","Fluids"]
+[27-Jun-2024 07:56:08 Europe/Berlin] Received request for disease: fever
+[27-Jun-2024 07:56:08 Europe/Berlin] Disease ID found: 1
+[27-Jun-2024 07:56:08 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[27-Jun-2024 07:56:08 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[27-Jun-2024 08:19:53 Europe/Berlin] Received request for disease: fever
+[27-Jun-2024 08:19:53 Europe/Berlin] Disease ID found: 1
+[27-Jun-2024 08:19:53 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[27-Jun-2024 08:19:53 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[27-Jun-2024 08:20:09 Europe/Berlin] Received request for disease: fever
+[27-Jun-2024 08:20:09 Europe/Berlin] Disease ID found: 1
+[27-Jun-2024 08:20:09 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[27-Jun-2024 08:20:09 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[28-Jun-2024 11:11:07 Europe/Berlin] Received request for disease: fever
+[28-Jun-2024 11:11:07 Europe/Berlin] Disease ID found: 1
+[28-Jun-2024 11:11:07 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[28-Jun-2024 11:11:07 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[01-Jul-2024 10:08:09 Europe/Berlin] Received request for disease: fever
+[01-Jul-2024 10:08:09 Europe/Berlin] Disease ID found: 1
+[01-Jul-2024 10:08:09 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[01-Jul-2024 10:08:09 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[02-Jul-2024 15:17:13 Europe/Berlin] Received request for disease: fever
+[02-Jul-2024 15:17:13 Europe/Berlin] Disease ID found: 1
+[02-Jul-2024 15:17:13 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[02-Jul-2024 15:17:13 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[05-Jul-2024 05:49:22 Europe/Berlin] Received request for disease: fever fever
+[05-Jul-2024 05:49:28 Europe/Berlin] Received request for disease: fever
+[05-Jul-2024 05:49:28 Europe/Berlin] Disease ID found: 1
+[05-Jul-2024 05:49:28 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[05-Jul-2024 05:49:28 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[08-Jul-2024 07:06:54 Europe/Berlin] Received request for disease: fever
+[08-Jul-2024 07:06:54 Europe/Berlin] Disease ID found: 1
+[08-Jul-2024 07:06:54 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[08-Jul-2024 07:06:54 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[08-Jul-2024 07:07:11 Europe/Berlin] Received request for disease: fever
+[08-Jul-2024 07:07:11 Europe/Berlin] Disease ID found: 1
+[08-Jul-2024 07:07:11 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[08-Jul-2024 07:07:11 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[12-Jul-2024 07:35:43 Europe/Berlin] Received request for disease: fever
+[12-Jul-2024 07:35:43 Europe/Berlin] Disease ID found: 1
+[12-Jul-2024 07:35:43 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[12-Jul-2024 07:35:43 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[17-Jul-2024 16:58:32 Europe/Berlin] Received request for disease: fever
+[17-Jul-2024 16:58:32 Europe/Berlin] Disease ID found: 1
+[17-Jul-2024 16:58:32 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[17-Jul-2024 16:58:32 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[19-Jul-2024 20:14:29 Europe/Berlin] Received request for disease: fever
+[19-Jul-2024 20:14:29 Europe/Berlin] Disease ID found: 1
+[19-Jul-2024 20:14:29 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[19-Jul-2024 20:14:29 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[19-Jul-2024 20:24:28 Europe/Berlin] Received request for disease: fever
+[19-Jul-2024 20:24:28 Europe/Berlin] Disease ID found: 1
+[19-Jul-2024 20:24:28 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[19-Jul-2024 20:24:28 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[19-Jul-2024 20:30:53 Europe/Berlin] Received request for disease: fever
+[19-Jul-2024 20:30:53 Europe/Berlin] Disease ID found: 1
+[19-Jul-2024 20:30:53 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[19-Jul-2024 20:30:53 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[19-Jul-2024 20:42:04 Europe/Berlin] Received request for disease: fever
+[19-Jul-2024 20:42:04 Europe/Berlin] Disease ID found: 1
+[19-Jul-2024 20:42:04 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[19-Jul-2024 20:42:04 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[19-Jul-2024 20:45:34 Europe/Berlin] Received request for disease: fever
+[19-Jul-2024 20:45:34 Europe/Berlin] Disease ID found: 1
+[19-Jul-2024 20:45:34 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[19-Jul-2024 20:45:34 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[19-Jul-2024 20:49:30 Europe/Berlin] Received request for disease: fever
+[19-Jul-2024 20:49:30 Europe/Berlin] Disease ID found: 1
+[19-Jul-2024 20:49:30 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[19-Jul-2024 20:49:30 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[20-Jul-2024 06:45:04 Europe/Berlin] Received request for disease: fever
+[20-Jul-2024 06:45:04 Europe/Berlin] Disease ID found: 1
+[20-Jul-2024 06:45:04 Europe/Berlin] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[20-Jul-2024 06:45:04 Europe/Berlin] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[25-Jul-2024 09:16:35 UTC] Received request for disease: Fever
+[25-Jul-2024 09:16:35 UTC] Disease ID found: 1
+[25-Jul-2024 09:16:35 UTC] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[25-Jul-2024 09:16:35 UTC] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[02-Aug-2024 06:50:11 UTC] Received request for disease: fever
+[02-Aug-2024 06:50:11 UTC] Disease ID found: 1
+[02-Aug-2024 06:50:11 UTC] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[02-Aug-2024 06:50:11 UTC] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[24-Aug-2024 05:54:51 UTC] Received request for disease: feaver
+[24-Aug-2024 05:55:04 UTC] Received request for disease: fever
+[24-Aug-2024 05:55:04 UTC] Disease ID found: 1
+[24-Aug-2024 05:55:04 UTC] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[24-Aug-2024 05:55:04 UTC] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[25-Sep-2024 09:59:12 UTC] Received request for disease: fever
+[25-Sep-2024 09:59:12 UTC] Disease ID found: 1
+[25-Sep-2024 09:59:12 UTC] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[25-Sep-2024 09:59:12 UTC] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[25-Sep-2024 14:00:53 UTC] Received request for disease: are you help me in critical situations'
+[27-Sep-2024 06:09:22 UTC] Received request for disease: Fever
+[27-Sep-2024 06:09:22 UTC] Disease ID found: 1
+[27-Sep-2024 06:09:22 UTC] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[27-Sep-2024 06:09:22 UTC] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[07-Oct-2024 09:08:47 UTC] Received request for disease: I stuck in critical situation
+[07-Oct-2024 09:08:55 UTC] Received request for disease: Malaria
+[07-Oct-2024 09:08:55 UTC] Disease ID found: 7
+[07-Oct-2024 09:08:55 UTC] Symptoms retrieved: ["Fever","Headache","Nausea","diarrhoea"]
+[07-Oct-2024 09:08:55 UTC] Medications retrieved: ["Consult a Doctor","chloroquine","Malarone","Take Rest"]
+[07-Oct-2024 09:09:06 UTC] Received request for disease: Cholora
+[07-Oct-2024 09:09:11 UTC] Received request for disease: Fever l
+[07-Oct-2024 09:09:16 UTC] Received request for disease: Fever
+[07-Oct-2024 09:09:16 UTC] Disease ID found: 1
+[07-Oct-2024 09:09:16 UTC] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[07-Oct-2024 09:09:16 UTC] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[21-Jan-2025 03:58:47 UTC] Received request for disease: fever
+[21-Jan-2025 03:58:47 UTC] Disease ID found: 1
+[21-Jan-2025 03:58:47 UTC] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[21-Jan-2025 03:58:47 UTC] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]
+[21-Jan-2025 03:58:59 UTC] Received request for disease: call
+[21-Jan-2025 03:59:29 UTC] Received request for disease: fever
+[21-Jan-2025 03:59:29 UTC] Disease ID found: 1
+[21-Jan-2025 03:59:29 UTC] Symptoms retrieved: ["High temperature","Sweating","Headache","Body pains"]
+[21-Jan-2025 03:59:29 UTC] Medications retrieved: ["Paracetamol","Ibuprofen","Take Rest","Take Fluids"]

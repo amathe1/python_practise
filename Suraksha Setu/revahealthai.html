@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REVA-AI</title>
+    <link rel="icon" type="image/png" href="croppedimage.png">
+    <style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://miro.medium.com/v2/resize:fit:1358/1*etDJsZIWf76sb1P_l6ZW3w.gif');
+    background-size: cover;
+    background-position: center;
+    color: #333;
+}
+
+.container {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    animation: fadeIn 1s ease-out;
+}
+
+.top-right-button {
+    position: fixed;
+    top: 80px;
+    right: 130px;
+    padding: 5px 10px;
+    background-color: #f0f4f8;
+    color: #0b0b0b;
+    border: none;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.top-right-button:hover {
+    background-color: #757e88;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    animation: slideInDown 1s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.chatbox {
+    width: 100%;
+    max-width: 280px;
+    margin: 40px auto 10px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    animation: fadeIn 0.5s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chatbox-header {
+    background: #007ffe;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-size: 14px;
+}
+
+.chatbox-body {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f4f8;
+    border-radius: 0 0 10px 10px;
+}
+
+.message {
+    margin: 5px 0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    max-width: 75%;
+    line-height: 1.4;
+    font-size: 12px;
+    transition: transform 0.2s ease;
+    background-color: rgba(255, 255, 255, 0.8);
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.message.bot {
+    color: #333;
+    background-color: #f0f4f8;
+    border-radius: 22px;
+}
+
+.message.user {
+    color: white;
+    text-align: right;
+    border-radius: 22px;
+    background-color: #007bff;
+    margin-left: auto;
+}
+
+.message:hover {
+    transform: scale(1.05);
+}
+
+button {
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    border: none;
+    border-radius: 30px;
+    background-color: #00aaff;
+    color: white;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 5px;
+}
+
+button:hover {
+    background-color: #0088cc;
+    transform: translateY(-2px);
+}
+
+.chatbox-footer {
+    display: flex;
+    padding: 7px;
+    background-color: #f0f4f8;
+    border-top: 1px solid #ddd;
+    gap: 5px;
+    border-radius: 0 0 10px 10px;
+}
+
+.chatbox-footer input {
+    flex: 1;
+    padding: 5px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: #333;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.chatbox-footer input:focus {
+    border-color: #007bff;
+}
+
+.chatbox-footer input::placeholder {
+    color: #888;
+}
+
+.chatbox-footer button {
+    padding: 5px 10px;
+    border-radius: 25px;
+    background-color: #e2e2e2;
+    color: rgb(3, 3, 3);
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.chatbox-footer button:hover {
+    background-color: #d6d6d6;
+    transform: translateY(-2px);
+}
+
+.chatbox-footer button.soundwave-button {
+    padding: 5px;
+    border-radius: 25px;
+    background-color: #e2e2e2;
+    color: rgb(3, 3, 3);
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.chatbox-footer button.soundwave-button svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.back-button {
+    position: fixed;
+    top: 30px;
+    left: 20px;
+    padding: 5px 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.back-button:hover {
+    background-color: transparent;
+    transform: scale(1.05);
+}
+
+.back-button svg {
+    width: 25px;
+    height: 25px;
+    fill: #ffffff;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <button class="top-right-button" onclick="navigateTo('injuryanalysis.html')">Injury Analysis</button>
+        </div>
+        <h1>SURAKSHA SETU</h1>  
+        <div class="chatbox">
+            <div class="chatbox-header">REVA-Health Ai</div>
+            <div class="chatbox-body"></div>
+            <div class="chatbox-footer">
+                <input type="text" placeholder="Type your message..." id="userInput">
+                <button onclick="sendMessage()">Send</button>
+                <button onclick="startRecognition()" class="soundwave-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="currentColor" class="bi bi-soundwave" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8.5 2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-1 0v-11a.5.5 0 0 1 .5-.5m-2 2a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5m4 0a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5m-6 1.5A.5.5 0 0 1 5 6v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m8 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m-10 1A.5.5 0 0 1 3 7v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5m12 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5"/>
+                      </svg>
+                </button>
+                
+            </div>
+        </div>
+        <button class="back-button" id="back"><svg xmlns="http://www.w3.org/2000/svg" width="35" height="40" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+          </svg></button>
+    </div>
+
+    <script>
+        const userInput = document.getElementById('userInput');
+        const chatboxBody = document.querySelector('.chatbox-body');
+        let selectedVoice = null;
+
+        window.onload = () => {
+            appendMessage('bot', 'Welcome, I\'m REVA how can i help you');
+            loadVoices();
+        };
+
+        userInput.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const message = userInput.value;
+            if (message.trim() === '') return;
+
+            appendMessage('user', message);
+            userInput.value = '';
+
+            handleUserInput(message);
+        }
+
+        function appendMessage(sender, message) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', sender);
+            messageElement.textContent = message;
+            chatboxBody.appendChild(messageElement);
+            chatboxBody.scrollTop = chatboxBody.scrollHeight;
+
+            if (sender === 'bot') {
+                speak(message);
+            }
+        }
+
+        function handleUserInput(message) {
+    if (message.toLowerCase() === 'hello') {
+        appendMessage('bot', 'Hi, I\'m REVA how can I help you?');
+    } else if (message.toLowerCase() === 'hi') { 
+        appendMessage('bot', 'Hello, I\'m REVA how can I help you?');
+    } else if (message.toLowerCase() === 'how are you') {
+        appendMessage('bot', 'I\'m doing great, thanks for asking! How about you?');
+    } else {
+        fetchSymptomsAndMedications(message);
+    }
+}
+
+
+
+        function fetchSymptomsAndMedications(disease) {
+            fetch(`retr.php?disease=${disease}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        appendMessage('bot', data.error);
+                    } else {
+                        appendMessage('bot', `You mentioned ${disease}. Here are the symptoms:`);
+                        data.symptoms.forEach(symptom => {
+                            appendMessage('bot', symptom);
+                        });
+
+                        const agreeButton = document.createElement('button');
+                        agreeButton.textContent = 'I agree with the symptoms';
+                        agreeButton.onclick = () => showMedications(data.medications);
+                        chatboxBody.appendChild(agreeButton);
+                    }
+                })
+                .catch(error => {
+                    appendMessage('bot', 'There was an error retrieving the data.');
+                    console.error('Error:', error);
+                });
+        }
+
+        function showMedications(medications) {
+            appendMessage('bot', 'Here are some medications for the symptoms:');
+            medications.forEach(medication => {
+                appendMessage('bot', medication);
+            });
+        }
+
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+
+        function startRecognition() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-IN';
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                userInput.value = transcript;
+                sendMessage();
+            };
+
+            recognition.start();
+        }
+
+        function loadVoices() {
+            const synth = window.speechSynthesis;
+            const voices = synth.getVoices();
+            console.log('Voices loaded:', voices);
+
+            // Find a female voice
+            selectedVoice = voices.find(voice => voice.name.toLowerCase().includes('en-IN-Neural2-A') || voice.name.toLowerCase().includes('female')) || voices[0];
+            console.log('Selected voice:', selectedVoice);
+        }
+
+        function speak(text) {
+            try {
+                if (selectedVoice) {
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.voice = selectedVoice;
+                    utterance.onerror = function(event) {
+                        console.error('SpeechSynthesisUtterance error:', event.error);
+                    };
+                    window.speechSynthesis.speak(utterance);
+                } else {
+                    console.error('No voice selected');
+                }
+            } catch (error) {
+                console.error('Error while speaking:', error);
+            }
+        }
+        
+    document.getElementById("back").addEventListener("click", function() {
+        window.location.href = "drcs.html"; 
+    });
+
+        // Ensures voices are loaded properly when they change
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+    </script>
+</body>
+</html>

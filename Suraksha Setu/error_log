@@ -1,0 +1,5 @@
+[26-Sep-2024 14:57:18 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/hnw67e7e63xc/public_html/viewdata.php:94
+Stack trace:
+#0 /home/hnw67e7e63xc/public_html/viewdata.php(94): mysqli->query()
+#1 {main}
+  thrown in /home/hnw67e7e63xc/public_html/viewdata.php on line 94

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Suraksha Setu</title>
+     <link rel="icon" type="image/png" href="croppedimage.png">
+	<style>
+body {
+    background: linear-gradient(135deg, #ffffff, #007ACC);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.splash-image {
+    width: 50%;
+    height: auto;
+	border-radius: 50;
+    animation: fade-in 2s ease-out, zoom-in 3s ease-in-out;
+    filter: drop-shadow(0 0 20px rgba(0, 122, 204, 0.5));
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes zoom-in {
+    0% {
+        transform: scale(0.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+        
+	</style>
+</head>
+<body>
+	<!-- Add the image to the page -->
+	<img src="mainimage2.png" class="splash-image" alt="Splash Image">
+	
+	<!-- Add a script to redirect to login.php after 5 seconds -->
+	<script>
+		setTimeout(function() {
+			window.location.href = 'login.php';
+		}, 3000);
+	</script>
+</body>
+</html>

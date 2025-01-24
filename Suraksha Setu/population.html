@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Population Display</title>
+    <link rel="icon" type="image/png" href="croppedimage.png">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .container:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1, h2, h3 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dropdowns {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        select {
+            width: 90%;
+            padding: 12px;
+            font-size: 14px;
+            border-radius: 8px;
+            border: 2px solid #ccc;
+            background-color: white;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 10px;
+        }
+        
+        select:hover, select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+        
+        .population-display {
+            text-align: center;
+        }
+        
+        .population-stats {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .population-category {
+            width: 60%;
+            padding: 15px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 10px 0;
+        }
+        
+        .population-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .population-category h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: #007bff;
+        }
+        
+        .population-category p {
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 28px;
+            left: 15px;
+            padding: 6px;
+            color: #000000;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 9999;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .back-button svg {
+            width: 25px;
+            height: 25px;
+            transition: fill 0.3s ease;
+        }
+        
+        .back-button:hover svg {
+            fill: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                margin: 30px auto;
+                padding: 10px;
+            }
+        
+            .population-category {
+                width: 90%;
+                margin: 15px 0;
+                padding: 20px;
+            }
+        
+            select {
+                padding: 12px;
+                font-size: 14px;
+            }
+        
+            .back-button {
+                padding: 8px;
+            }
+        
+            .back-button svg {
+                width: 30px;
+                height: 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                width: 100%;
+                margin: 20px auto;
+                padding: 5px;
+            }
+        
+            .population-category {
+                width: 90%;
+                margin: 10px 0;
+                padding: 20px;
+            }
+        
+            select {
+                padding: 10px;
+                font-size: 12px;
+            }
+        
+            .back-button {
+                padding: 6px;
+            }
+        
+            .back-button svg {
+                width: 25px;
+                height: 25px;
+            }
+        
+            h1, h2, h3 {
+                font-size: 18px;
+            }
+        
+            .population-category h3 {
+                font-size: 20px;
+            }
+        
+            .population-category p {
+                font-size: 16px;
+            }
+        }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+        <h1>Population Display</h1>
+        <div class="dropdowns">
+            <select id="stateDropdown" onchange="updateDistricts()">
+                <option value="">Select State</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Telangana">Telangana</option>
+            </select>
+            <select id="districtDropdown" onchange="displayPopulation()">
+                <option value="">Select District</option>
+            </select>
+        </div>
+        <div class="population-display">
+            <h2>Population</h2>
+            <div class="population-stats">
+                <div class="population-category">
+                    <h3><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#5f6368"><path d="M480-660q-29 0-49.5-20.5T410-730q0-29 20.5-49.5T480-800q29 0 49.5 20.5T550-730q0 29-20.5 49.5T480-660Zm-80 500v-200h-40v-180q0-33 23.5-56.5T440-620h80q33 0 56.5 23.5T600-540v180h-40v200H400Z"/></svg><br>Men</h3>
+                    <p id="menPopulation">-</p>
+                </div>
+                <div class="population-category">
+                    <h3><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#5f6368"><path d="M413.33-80v-226.67h-120L402-628q8.67-24.67 30.33-38.33Q454-680 480-680t47.67 13.67Q549.33-652.67 558-628l108.67 321.33h-120V-80H413.33Zm66.72-649.33q-31.05 0-53.22-22.12-22.16-22.11-22.16-53.16 0-31.06 22.11-53.22Q448.89-880 479.95-880q31.05 0 53.22 22.11 22.16 22.12 22.16 53.17t-22.11 53.22q-22.11 22.17-53.17 22.17Z"/></svg><br>Women</h3>
+                    <p id="womenPopulation">-</p>
+                </div>
+                <div class="population-category">
+                    <h3><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#5f6368"><path d="m320-40-53.33-40 104-139-5.34-198.33q-1.33-45 5.34-95.5 6.66-50.5 20.66-90.17l-84.66 48.33v121.34H240v-160l170-97.34q19.67-11.33 36.17-17.16 16.5-5.84 31.16-5.84 26.34 0 47.5 21.17 21.17 21.17 43.5 66.5 24 48.67 58.67 77.33Q661.67-520 708.33-504q8.34-5.33 15.34-7.33t15.33-2q23.67 0 42.33 18.33Q800-476.67 800-453.33V-40h-33.33v-413.33q0-10.67-8-18.67-8-8-18.67-8-10.67 0-18.67 8-8 8-8 18.67v36.66H680V-445q-46-15-86.33-45.17-40.34-30.16-65.34-74.16-11.66 32-18.16 72.83t-4.5 74.17l91 128.66V-40H530v-212.67L449.67-350 440-200 320-40Zm218.67-709.33q-31 0-53.17-22.17t-22.17-53.17q0-31 22.17-53.16Q507.67-900 538.67-900t53.16 22.17Q614-855.67 614-824.67q0 31-22.17 53.17-22.16 22.17-53.16 22.17Z"/></svg><br>Senior Citizens</h3>
+                    <p id="seniorPopulation">-</p>
+                </div>
+                <div class="population-category">
+                    <h3><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#5f6368"><path d="M344-65.67q-47.33 0-84.17-27-36.83-27-53.5-71-16 24.34-39.5 37.84-23.5 13.5-53.5 13.5-48.33 0-80.5-33.67Q.67-179.67.67-226.33q0-47 29.66-77.5 29.67-30.5 75.34-32.84-16.67-20-25.84-45.16-9.16-25.17-9.16-51.5 0-38.67 19.83-72.34 19.83-33.66 56.17-54.33 5 14.67 12.83 31.5t16.83 29.17q-18 12.33-28.33 30.16-10.33 17.84-10.33 37.5 0 58.67 47.66 73.34Q233-343.67 276.67-335l13.66 23.33q-11.66 34-19.33 56.5-7.67 22.5-7.67 41.17 0 32.67 24.17 57.17t57.17 24.5q40 0 66-34.34Q436.67-201 453-248t25.17-95q8.83-48 14.5-74.33l64.66 17.66q-9 43.67-21.33 101-12.33 57.34-35.17 109.17-22.83 51.83-60 87.83-37.16 36-96.83 36ZM114-179q19.67 0 33.17-13.5t13.5-33.17q0-19.66-13.5-33.16-13.5-13.5-33.17-13.5t-33.17 13.5q-13.5 13.5-13.5 33.16 0 19.67 13.5 33.17T114-179Zm294.67-179.33q-45.34-40.34-82.5-75.17-37.17-34.83-63.84-68-26.66-33.17-41.16-65.67-14.5-32.5-14.5-68.5 0-61.66 42.83-104.5Q292.33-783 354-783q7.33 0 13.67.5 6.33.5 13 1.83-7.34-14.66-10.67-26-3.33-11.33-3.33-23 0-47.33 33-80.33T480-943q47.33 0 80.33 33t33 80.33q0 11-3 22.5t-11 26.17q6.67-1.33 13-1.67 6.34-.33 13.67-.33 58 0 98.33 37.17 40.34 37.16 47 92.16-15.33-1.66-33.5-1.33-18.16.33-33.83 2.33-5.67-27.66-26.5-45.66-20.83-18-51.5-18-36.33 0-57.17 20.5-20.83 20.5-56.16 61.5h-26.34q-36.33-43-57.16-62.5-20.84-19.5-55.17-19.5-34.67 0-57.67 23t-23 57.66q0 23.67 13 48.5 13 24.84 36.84 53Q347-506 380.83-474.67q33.84 31.34 75.5 68.67l-47.66 47.67ZM480-783q19.67 0 33.17-13.5t13.5-33.17q0-19.66-13.5-33.16-13.5-13.5-33.17-13.5t-33.17 13.5q-13.5 13.5-13.5 33.16 0 19.67 13.5 33.17T480-783ZM615-65q-22 0-43.5-6.67Q550-78.33 530-92q9-12.67 18-29t15.33-30.33q13 9.66 26.34 14.33 13.33 4.67 27 4.67 34 0 57.5-24.5t23.5-57.5q0-19.67-8-42-8-22.34-19-55.67l13.66-23.33q44.67-8 91.84-22.67 47.16-14.67 47.16-73.33 0-42.67-31.16-63-31.17-20.34-68.84-20.34-42 0-99 16t-132.66 41l-17-64.66q76.66-25 137.66-42t111.34-17q65.66 0 116 39.33Q890-502.67 890-432q0 26.33-9.17 51.17Q871.67-356 855-336q45 2.33 75 33.17 30 30.83 30 77.16 0 46.67-32.17 80.34-32.16 33.66-80.5 33.66-29.33 0-53.5-13.5-24.16-13.5-39.5-37.83-17.33 44-54.16 71Q663.33-65 615-65Zm232.67-113.33q19 0 32.33-13.5 13.33-13.5 13.33-33.17 0-19-13.83-33.33-13.83-14.34-32.83-14.34t-32.84 13.84Q800-245 800-226t14.33 33.33q14.34 14.34 33.34 14.34ZM114-225.67Zm366-604ZM846.67-226Z"/></svg><br>Total Population</h3>
+                    <p id="totalPopulation">-</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="back-button" id="back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="40" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+        </svg>
+    </button>
+
+    <script>
+        const populationData = {
+            "Tamil Nadu": {
+                "Chennai": {
+                    "Men": 2500000,
+                    "Women": 2700000,
+                    "SeniorCitizens": 500000
+                },
+                "Coimbatore": {
+                    "Men": 1200000,
+                    "Women": 1300000,
+                    "SeniorCitizens": 300000
+                }
+            },
+            "Andhra Pradesh": {
+                "Visakhapatnam": {
+                    "Men": 1800000,
+                    "Women": 1900000,
+                    "SeniorCitizens": 400000
+                },
+                "Vijayawada": {
+                    "Men": 1500000,
+                    "Women": 1600000,
+                    "SeniorCitizens": 350000
+                }
+            },
+            "Telangana": {
+                "Hyderabad": {
+                    "Men": 2000000,
+                    "Women": 2200000,
+                    "SeniorCitizens": 450000
+                },
+                "Warangal": {
+                    "Men": 1100000,
+                    "Women": 1200000,
+                    "SeniorCitizens": 250000
+                }
+            }
+        };
+
+        function updateDistricts() {
+            const state = document.getElementById("stateDropdown").value;
+            const districtDropdown = document.getElementById("districtDropdown");
+            districtDropdown.innerHTML = "<option value=''>Select District</option>";
+
+            if (state) {
+                const districts = Object.keys(populationData[state]);
+                districts.forEach(district => {
+                    const option = document.createElement("option");
+                    option.value = district;
+                    option.text = district;
+                    districtDropdown.appendChild(option);
+                });
+            }
+        }
+
+        function displayPopulation() {
+            const state = document.getElementById("stateDropdown").value;
+            const district = document.getElementById("districtDropdown").value;
+
+            if (state && district) {
+                const population = populationData[state][district];
+                document.getElementById("menPopulation").innerText = population.Men.toLocaleString();
+                document.getElementById("womenPopulation").innerText = population.Women.toLocaleString();
+                document.getElementById("seniorPopulation").innerText = population.SeniorCitizens.toLocaleString();
+                 // Calculate and display total population
+                 const totalPopulation = population.Men + population.Women + population.SeniorCitizens;
+                 document.getElementById("totalPopulation").innerText = totalPopulation.toLocaleString();
+             
+            } else {
+                document.getElementById("menPopulation").innerText = "-";
+                document.getElementById("womenPopulation").innerText = "-";
+                document.getElementById("seniorPopulation").innerText = "-";
+            }
+        }
+
+        document.getElementById("back").addEventListener("click", function() {
+            window.location.href = "adminpanel.html";
+        });
+    </script>
+</body>
+</html>

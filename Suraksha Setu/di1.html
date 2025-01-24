@@ -1,0 +1,627 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Suraksha Setu: Emergency Alert System">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+    <title>DI1</title>
+    <link rel="icon" type="image/png" href="croppedimage.png">
+    <style>
+        /* Your existing CSS */
+        body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: whitesmoke;
+    color: #333;
+}
+
+header {
+    width: 100%;
+    height: auto;
+    background-color: white;
+    color: #007acc;
+    padding: 5px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+header h1 {
+    margin-right: 25%;
+    padding: 0;
+    font-size: 24px;
+    text-align: center;
+    flex: 1;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.header-img {
+    width: 10%;
+    height: 10%;
+    margin-right: 10px;
+}
+
+header button {
+    background: none;
+    border: none;
+    color: #007acc;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 10px;
+    position: relative;
+}
+
+header button:hover {
+    color: blue;
+}    
+
+.container {
+    width: 90%;
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.location-button {
+    background-color: transparent;
+    color: #007acc;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 30px;
+}
+
+.location-button:hover {
+    background-color: #979494;
+}
+
+.visualization {
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.visualization h2 {
+    margin-bottom: 15px;
+    color: #007acc;
+}
+
+.visualization iframe, .visualization canvas {
+    width: 100%;
+    height: 300px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+}
+
+.voice-command {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 30px;
+}
+
+.voice-command:hover {
+    background-color: #218838;
+}
+
+.voice-command:active {
+    background-color: #1e7e34;
+}
+
+.circular-button {
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 30px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.circular-button:hover {
+    background-color: #0056b3;
+}
+
+.circular-button:active {
+    background-color: #003d80;
+}
+
+.shake-btn, .history-button {
+    font-size: 18px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #007acc;
+    border-radius: 10px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.shake-btn:hover, .history-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-5px);
+}
+
+#deactivateButton, #downloadButton, #switchCameraButton, #emergencyForm, #timerDisplay, .container.visualization, #videoContainer {
+    display: none;
+}
+
+#videoContainer {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#videoContainer video {
+    width: 100%;
+    max-width: 600px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+}
+
+#videoContainer button {
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+}
+
+#videoContainer button:hover {
+    background-color: #0056b3;
+}
+
+#videoContainer button:active {
+    background-color: #003d80;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 20px;
+    }
+
+    .header img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .visualization iframe, .visualization canvas {
+        height: 250px;
+    }
+
+    .circular-button {
+        width: 120px;
+        height: 120px;
+        font-size: 24px;
+    }
+
+    .shake-btn, .history-button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 18px;
+    }
+
+    .header-img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .container {
+        padding: 5px;
+    }
+
+    .visualization iframe, .visualization canvas {
+        height: 200px;
+    }
+
+    .circular-button {
+        width: 100px;
+        height: 100px;
+        font-size: 20px;
+    }
+
+    .shake-btn, .history-button {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}
+.map-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 200px; /* Adjust width as needed */
+    height: 100px; /* Adjust height as needed */
+    background-color: #ffffff; /* Background color for contrast */
+    border: 1px solid #ccc; /* Border for better definition */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    padding: 10px; /* Padding inside the container */
+    text-align: center; /* Center the text */
+    display: none;
+    flex-direction: column;
+    justify-content: center; /* Center text vertically */
+    align-items: center; /* Center text horizontally */
+    font-size: 14px; /* Font size for readability */
+    color: #333; /* Text color */
+    font-family: 'Arial', sans-serif; /* Font style */
+}
+
+.map-container p {
+    margin: 0;
+    padding: 5px;
+    font-weight: bold;
+}
+
+
+#map {
+    width: 50%;
+    height: 200px; /* Adjust height as needed */
+    margin-bottom: 10px;
+}
+
+#coordinates {
+    font-size: 18px;
+    color: #333;
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div style="display: flex; align-items: center;">
+            <button onclick="window.location.href = 'dashboard.html'"><i class="fas fa-arrow-left"></i></button>
+            <img src="mainimage2.png" alt="Logo" class="header-img">
+        </div>
+        <h1>DI1</h1>
+        <div class="header-buttons">
+            <button class="location-button" onclick="getLocation()">
+                <i class="fas fa-map-marker-alt"></i>  
+            </button>
+        </div>
+    </header>
+
+    <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+        <button class="shake-btn" onclick="window.location.href = 'shakealert.html'">
+            <i class="fas fa-hand-paper"></i> Check Intensity
+        </button>
+    </div>
+
+    <button class="circular-button" id="alertButton" onclick="activateAlert()">
+        Alert
+    </button>
+    <button class="circular-button" id="deactivateButton" onclick="deactivateAlert()">
+        Deactivate
+    </button>
+    <div id="alertMessage" style="display: none;">Alert Activated!</div>
+
+    <div class="container visualization">
+        <h2>Map Visualization</h2>
+        <iframe id="mapFrame" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+            <!-- Existing code... -->
+        
+            <div id="map-container" class="map-container">
+                <div id="map"></div>
+                <div id="coordinates">
+                    Latitude: <span id="latitude"></span><br>
+                    Longitude: <span id="longitude"></span>
+                </div>
+            </div>
+        
+            <!-- Existing code... -->
+        </div>
+        
+    </div>
+
+    <div id="videoContainer">
+        <video id="recordedVideo" autoplay></video>
+        <button id="stopButton" onclick="stopVideoRecording()">Stop</button>
+        <button id="downloadButton" onclick="downloadVideo()">Download</button>
+        <button id="switchCameraButton" onclick="switchCamera()">Switch Camera</button>
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+let map;
+let marker;
+let recordedChunks = [];
+let stream = null;
+let mediaRecorder = null;
+let isRecording = false;
+
+
+async function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+function updateCoordinates(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    document.getElementById('latitude').textContent = latitude;
+    document.getElementById('longitude').textContent = longitude;
+
+    if (map && marker) {
+        map.setView([latitude, longitude], 15);
+        marker.setLatLng([latitude, longitude]);
+    } else {
+        initMap(latitude, longitude);
+    }
+}
+
+function showPosition(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    const mapFrame = document.getElementById("mapFrame");
+    mapFrame.src = `https://maps.google.com/maps?q=${latitude},${longitude}&output=embed`;
+
+    if (!map) {
+        map = new google.maps.Map(document.getElementById("mapFrame"), {
+            center: { lat: latitude, lng: longitude },
+            zoom: 14
+        });
+
+        marker = new google.maps.Marker({
+            position: { lat: latitude, lng: longitude },
+            map: map,
+            title: "Your Location"
+        });
+    } else {
+        marker.setPosition({ lat: latitude, lng: longitude });
+        map.setCenter({ lat: latitude, lng: longitude });
+    }
+}
+function showError(error) {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            alert("User denied the request for Geolocation.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            alert("Location information is unavailable.");
+            break;
+        case error.TIMEOUT:
+            alert("The request to get user location timed out.");
+            break;
+        case error.UNKNOWN_ERROR:
+            alert("An unknown error occurred.");
+            break;
+    }
+}
+
+async function getMediaStream() {
+    if (!stream) {
+        try {
+            stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        } catch (error) {
+            console.error('Error accessing media devices.', error);
+            alert('Could not access camera and microphone. Please check your permissions.');
+        }
+    }
+    return stream;
+}
+
+async function activateAlert() {
+    if (!isRecording) {
+        isRecording = true;
+        document.getElementById("alertMessage").style.display = "block";
+        document.getElementById("alertButton").style.display = "none";
+        document.getElementById("deactivateButton").style.display = "block";
+        document.querySelector('.container.visualization').style.display = "block";
+        document.getElementById("videoContainer").style.display = "block";
+        try {
+            await startVideoRecording();
+        } catch (error) {
+            console.error('Error starting video recording.', error);
+            alert('Failed to start video recording.');
+            isRecording = false; // Reset recording state on error
+        }
+        getLocation();
+        storeAlertLocation();
+    }
+}
+
+function deactivateAlert() {
+    if (isRecording) {
+        isRecording = false;
+        document.getElementById("alertMessage").style.display = "none";
+        document.getElementById("alertButton").style.display = "block";
+        document.getElementById("deactivateButton").style.display = "none";
+        document.querySelector('.container.visualization').style.display = "none";
+        document.getElementById("videoContainer").style.display = "none";
+        stopVideoRecording();
+    }
+}
+
+async function startVideoRecording() {
+    const mediaStream = await getMediaStream();
+    if (!mediaStream) {
+        throw new Error('No media stream available.');
+    }
+
+    const recordedVideo = document.getElementById("recordedVideo");
+    recordedVideo.srcObject = mediaStream;
+
+    try {
+        mediaRecorder = new MediaRecorder(mediaStream);
+        mediaRecorder.ondataavailable = handleDataAvailable;
+        mediaRecorder.onstop = handleStop;
+
+        mediaRecorder.start();
+        console.log('MediaRecorder started successfully.');
+    } catch (error) {
+        console.error('Error creating or starting MediaRecorder.', error);
+        throw new Error('Failed to start recording.');
+    }
+}
+
+function handleDataAvailable(event) {
+    if (event.data.size > 0) {
+        recordedChunks.push(event.data);
+    }
+}
+
+function handleStop() {
+    const videoBuffer = new Blob(recordedChunks, { type: 'video/webm' });
+    const videoURL = URL.createObjectURL(videoBuffer);
+    const recordedVideo = document.getElementById("recordedVideo");
+    recordedVideo.src = videoURL;
+}
+
+function stopVideoRecording() {
+    if (mediaRecorder) {
+        mediaRecorder.stop();
+        const mediaStream = document.getElementById("recordedVideo").srcObject;
+        const tracks = mediaStream.getTracks();
+        tracks.forEach(track => track.stop());
+        document.getElementById("downloadButton").style.display = "block";
+    }
+}
+
+function downloadVideo() {
+    const videoBuffer = new Blob(recordedChunks, { type: 'video/webm' });
+    const videoURL = URL.createObjectURL(videoBuffer);
+    const downloadLink = document.createElement("a");
+    downloadLink.href = videoURL;
+    downloadLink.download = "recorded-video.webm";
+    downloadLink.click();
+}
+
+function switchCamera() {
+    // Implement the logic for switching camera here
+}
+
+function storeAlertLocation() {
+    const latitude = document.getElementById('latitude').textContent;
+    const longitude = document.getElementById('longitude').textContent;
+    const timestamp = new Date().toISOString(); // Time in ISO format, which includes time zone information
+
+    fetch('store_alert.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `latitude=${latitude}&longitude=${longitude}&timestamp=${timestamp}`,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(data => {
+        console.log('Data stored successfully:', data);
+    })
+    .catch(error => {
+        console.error('Error storing data:', error);
+    });
+}
+
+
+
+function initMap(latitude, longitude) {
+    map = L.map('map').setView([latitude, longitude], 15);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    marker = L.marker([latitude, longitude]).addTo(map)
+        .bindPopup('You are here!')
+        .openPopup();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(updateCoordinates, showError);
+    } else {
+        console.error('Geolocation is not supported by this browser.');
+    }
+});
+
+// Voice recognition
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+recognition.interimResults = true;
+
+recognition.addEventListener('result', (e) => {
+    const transcript = Array.from(e.results)
+        .map(result => result[0])
+        .map(result => result.transcript)
+        .join('');
+
+    if (transcript.toLowerCase().includes('help')) {
+        activateAlert();
+    }
+});
+
+recognition.addEventListener('end', recognition.start);
+recognition.start();
+
+
+    </script>
+</body>
+</html>

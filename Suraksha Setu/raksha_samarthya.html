@@ -1,0 +1,619 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raksha Samarthya</title>
+    <link rel="icon" type="image/png" href="croppedimage.png">
+    <link rel="manifest" href="manifest.json"> <!-- Include the manifest file -->
+    <style>
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.5rem;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0; /* Light grey background */
+    color: #4a4a4a; /* Dark grey text color */
+    overflow-x: hidden; /* Ensure no horizontal overflow */
+}
+
+/* Button Container Styling */
+.button-container {
+    position: absolute;
+    top: 2px;
+    right: 4%;
+    position: absolute; /* Added to enable top and right positioning */
+}
+
+#command-button {
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #2c3e50; /* Dark blue-grey button background */
+    color: #ecf0f1; /* Light grey text color */
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    
+   
+}
+
+#command-button:hover {
+    background-color: #34495e; /* Slightly lighter on hover */
+}
+
+#command-list {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    border: 1px solid #bdc3c7; /* Light grey border */
+    background-color: #ffffff; /* White background */
+    list-style-type: none;
+    padding: 10px;
+    width: 200px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+
+#command-list li {
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+#command-list li:hover {
+    background-color: #f4f4f4; /* Light grey on hover */
+}
+
+/* Header Styling */
+header {
+    background-color: #3498db; /* Vibrant blue background */
+    color: #ffffff; /* White text color */
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    height: 10%;
+    position: relative;
+    border-bottom: 1px solid #2980b9; /* Darker blue border */
+    overflow: hidden; /* Ensure no overflow issues */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.0rem;
+    letter-spacing: 1.5px;
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    text-transform: uppercase;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 8px #ffffff, 0 0 16px #3498db, 0 0 24px #3498db; }
+    to { text-shadow: 0 0 16px #ffffff, 0 0 24px #3498db, 0 0 32px #3498db; }
+}
+
+/* Main Content Styling */
+main {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 16px;
+    background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white background */
+    border: 1px solid #bdc3c7; /* Light grey border */
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
+    padding-bottom: 12px; /* Adjust padding for footer space */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Chatbot Container Styling */
+.chatbot-container {
+    background-color: #ffffff; /* White background */
+    border: 1px solid #bdc3c7; /* Light grey border */
+    border-radius: 12px;
+    padding: 16px;
+    max-width: 80%; /* Adjusted for mobile width */
+    margin: 16px auto;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    animation: slideIn 1s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Chat Output Styling */
+.chat-output {
+    overflow-y: auto;
+    max-height: 220px;
+    padding: 12px;
+    border: 1px solid #bdc3c7; /* Light grey border */
+    border-radius: 8px;
+    background-color: #f5f5f5; /* Slightly grey background */
+    margin-bottom: 16px;
+    position: relative;
+}
+
+/* User Message Styling */
+.user-message {
+    align-self: flex-end;
+    background-color: #2980b9; /* Blue background for user messages */
+    color: #ffffff; /* White text color */
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    max-width: 75%; /* Increased width for mobile */
+    word-wrap: break-word;
+}
+
+/* Bot Message Styling */
+.bot-message {
+    align-self: flex-start;
+    background-color: #ecf0f1; /* Light grey background for bot messages */
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    max-width: 75%; /* Increased width for mobile */
+    word-wrap: break-word;
+}
+
+/* Chat Input Container Styling */
+.chat-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.chat-input {
+    width: calc(100% - 20px);
+    padding: 12px;
+    border: 1px solid #bdc3c7; /* Light grey border */
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+/* Chat Button Container Styling */
+.chat-btn-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.send-btn,
+.delete-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.send-btn {
+    background-color: #3498db;
+    color: #ffffff;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: #ffffff;
+}
+
+/* Chatbot Toggle Styling */
+.chatbot-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2980b9;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.chatbot-toggle.active {
+    display: block;
+}
+
+@media screen and (max-width: 375px) {
+    header h1 {
+        font-size: 1.4rem;
+    }
+
+    .chatbot-container {
+        margin: 10px auto;
+    }
+
+    .chat-input {
+        padding: 10px;
+    }
+
+    .send-btn, .delete-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .chat-btn-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .send-btn, .delete-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .chat-output {
+        max-height: 180px;
+    }
+}
+
+.bot-message strong {
+    font-size: 1.4em;
+    filter: saturate(4.5);
+    filter: contrast(200%);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    animation: pulse 2s infinite;
+}
+
+button {
+    padding: 5px 10px;
+}
+
+</style>
+</head>
+<body>
+    <header>
+        <h1>Raksha Samarthya</h1>
+        
+    </header>
+    <div class="button-container">
+        <button id="command-button">Commands</button>
+        <ul id="command-list">
+            <ul>
+                <li>1. help</li>
+                <li>2. assist</li>
+                <li>3. support</li>
+                <li>4. earthquake</li>
+                <li>5. flood</li>
+                <li>6. cyclone</li>
+                <li>7. hurricane</li>
+                <li>8. tsunami</li>
+                <li>9. wildfire</li>
+                <li>10. volcano</li>
+                <li>11. landslide</li>
+                <li>12. thunderstorm</li>
+                <li>13. tornado</li>
+                <li>14. nuclear disaster</li>
+                <li>15. war</li>
+                <li>16. find shelter</li>
+                <li>17. nearest hospital</li>
+                <li>18. emergency services</li>
+                <li>19. who are you</li>
+                <li>20. what can you do</li>
+                <li>21. about this bot</li>
+                <li>22. tell me a joke</li>
+                <li>23. random fact</li>
+                <li>24. stones</li>
+                <li>25. ropes</li>
+                <li>26. water</li>
+                <li>27. food</li>
+                <li>28. fire</li>
+                <li>29. first aid</li>
+                <li>30. shelter</li>
+            </ul>
+            
+    </div>  
+
+    <main>
+        
+        <!-- Chatbot section -->
+        <section id="chatbot" class="chatbot-container">
+            <h2>Chatbot</h2>
+            <div class="chat-output" id="chat-output">
+                <!-- Chatbot messages will be appended here -->
+                <p>Welcome to Raksha Samarthya! How can I assist you today?</p>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="user-input" class="chat-input" placeholder="Type your message...">
+                <div class="chat-btn-container">
+                    <button onclick="sendMessage()" class="send-btn">Send</button>
+                    <button onclick="deleteChat()" class="delete-btn">Delete</button>
+                </div>
+
+                </div>
+            </div>
+            
+        </section>
+    </main>
+    <!-- JavaScript for chatbot functionality, PDF handling, and Service Worker registration -->
+    <script> 
+ document.addEventListener('DOMContentLoaded', function() {
+            const commandButton = document.getElementById('command-button');
+            const commandList = document.getElementById('command-list');
+
+            if (commandButton && commandList) {
+                commandButton.addEventListener('click', function() {
+                    if (commandList.style.display === 'none' || commandList.style.display === '') {
+                        commandList.style.display = 'block';
+                    } else {
+                        commandList.style.display = 'none';
+                    }
+                });
+            } else {
+                console.error('Command button or command list not found');
+            }
+        });
+
+        const commands = {
+            help: ["help", "assist", "support"],
+            greetings: ["hello", "hi", "hey", "good morning", "good evening"],
+            farewells: ["bye", "goodbye", "see you later"],
+            thanks: ["thank you", "thanks", "thank you very much"],
+            alerts: ["earthquake", "flood", "cyclone", "hurricane", "tsunami", "wildfire", "volcano", "blizzard", "tornado"],
+            advice: ["survival tips", "emergency kit", "first aid", "evacuation plan", "i have two stones", "safety tips"],
+            weather: ["weather update", "current weather", "forecast"],
+            location: ["find shelter", "nearest hospital", "emergency services"],
+            info: ["who are you", "what can you do", "about this bot"],
+            casual: ["how are you", "what's up", "tell me a joke", "random fact", "news"]
+        };
+
+        const responses = {
+            help: "I'm here to assist you. Please let me know what you need help with and mention the items present in your sorroundings.",
+            greetings: "Hello! How can I assist you today?",
+            farewells: "Goodbye! Stay safe and take care.",
+            thanks: "You're welcome! If you have any other questions, feel free to ask.",
+            alerts: {
+                earthquake: "During an earthquake, drop, cover, and hold on. Stay indoors until the shaking stops. If you're outside, move to an open area away from buildings.",
+                flood: "During a flood, move to higher ground immediately. Avoid walking or driving through floodwaters. Stay informed through local news.",
+                cyclone: "During a cyclone, stay indoors and away from windows. Secure loose objects outside. Follow evacuation orders if given.",
+                hurricane: "During a hurricane, find shelter in a small, windowless room. Have a supply kit ready with essentials like water, food, and medications.",
+                tsunami: "During a tsunami, move to higher ground immediately. Follow evacuation orders and stay away from the coast until officials declare it safe.",
+                wildfire: "During a wildfire, evacuate immediately if instructed. Stay informed through local authorities and avoid areas with heavy smoke.",
+                volcano: "During a volcanic eruption, evacuate if instructed. Stay indoors to avoid ashfall and wear a mask if you must go outside.",
+                blizzard: "During a blizzard, stay indoors and keep warm. Avoid travel unless absolutely necessary. Keep a supply kit with food, water, and blankets.",
+                tornado: "During a tornado, find shelter in a basement or an interior room without windows. Cover yourself with a mattress or heavy blankets."
+            },
+            advice: {
+                "survival tips": "Here are some survival tips: 1. Always have an emergency kit ready. 2. Know the evacuation routes. 3. Stay informed through reliable sources.",
+                "emergency kit": "An emergency kit should include: water, non-perishable food, flashlight, batteries, first aid supplies, medications, and important documents.",
+                "first aid": "First aid tips: 1. Clean wounds with clean water. 2. Apply pressure to stop bleeding. 3. Use sterile bandages. 4. Seek medical attention if needed.",
+                "evacuation plan": "Create an evacuation plan by: 1. Identifying exit routes. 2. Having a meeting point. 3. Keeping important documents and supplies ready.",
+                "i have two stones": "use that two stones and make fire with it to give signals.",
+                "safety tips": "General safety tips: 1. Stay informed. 2. Follow official instructions. 3. Keep a list of emergency contacts. 4. Know the hazards in your area."
+            },
+            weather: "Please specify your location for the current weather update.",
+            location: {
+                "find shelter": "Finding shelter: Check local maps for designated shelters or ask local authorities for safe locations.",
+                "nearest hospital": "Finding the nearest hospital: Use maps or emergency services to locate the closest hospital in your area.",
+                "emergency services": "Emergency services: Dial emergency numbers like 911 or your local equivalent for immediate assistance."
+            },
+            info: {
+                "who are you": "I am Raksha Samarthya's virtual assistant. I'm here to provide information and assistance during emergencies.",
+                "what can you do": "I can provide information on emergency preparedness, survival tips, and more. Ask me anything related to safety and emergencies.",
+                "about this bot": "This chatbot is designed to help you stay safe during emergencies by providing useful information and guidance."
+            },
+            casual: {
+                "how are you": "I'm just a program, but I'm here to assist you! How can I help?",
+                "what's up": "I'm here to help you with any questions or information you need. How can I assist?",
+                "tell me a joke": "Why don't scientists trust atoms? Because they make up everything!",
+                "random fact": "Did you know? Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still edible.",
+                "news": "For the latest news, please specify the topic you're interested in."
+            }
+        };
+        const surroundingsItems = [
+    "stones", "stick", "ropes", "rods", "wood", "matchbox", 
+    "flashlight", "radio", "mask", "water drum", "whistle", "communication devices", 
+    "first aid kit"
+];
+
+// Function to check mentioned items and generate instructions
+function getResponse(message) {
+    const mentionedItems = surroundingsItems.filter(item => message.includes(item));
+    if (mentionedItems.length > 0) {
+        // Generate instructions based on mentioned items
+        return { text: generateInstructions(mentionedItems), audio: null };
+    }
+
+    for (let command in commands) {
+        if (commands[command].includes(message)) {
+            if (typeof responses[command] === 'object') {
+                for (let key in responses[command]) {
+                    if (message.includes(key)) {
+                        return { text: responses[command][key], audio: null };
+                    }
+                }
+            }
+            return { text: responses[command], audio: null };
+        }
+    }
+    return {
+        text: "I'm sorry, I don't understand that command. Type 'help' for a list of commands.",
+        audio: null
+    };
+}
+
+function generateInstructions(items) {
+    // Example instructions; customize based on your needs
+    let instructions = "To escape from danger using the items mentioned:\n";
+    items.forEach(item => {
+        switch (item) {
+            case "stones":
+                instructions += "- Use stones to create fire by striking them together or with a matchbox if available. The fire can be used for warmth or to signal for help.\n";
+                break;
+            case "stick":
+                instructions += "- Use a stick as a walking aid if you're injured or to build a shelter. It can also be used to fend off small animals.\n";
+                break;
+            case "ropes":
+                instructions += "- Use ropes to secure shelter, climb to safety, or tie down objects to prevent them from being carried away by strong winds or water.\n";
+                break;
+                case "wood":
+                instructions += "- Use wood to build a fire for warmth and signaling. You can also use it to construct a makeshift shelter or raft if needed. If you have any matchbox use it to make fire or else use stones.\n";
+                break;
+            case "whistle":
+                instructions += "- Use the whistle to alert rescue teams of your location.\n";
+                break;
+            case "first aid kit":
+                instructions += "- Use the first aid kit to treat wounds.\n";
+                break;
+            case "water drum":
+                instructions += "- If facing flooding, use a water drum to drain water from your surroundings. In extreme cases, it can be used as a makeshift boat to escape floodwaters.\n";
+                break;
+            case "communication devices":
+                instructions += "- Use communication devices like a mobile phone or walkie-talkie to contact emergency services or let loved ones know you're safe.\n";
+                break;
+            case "mask":
+                instructions += "- Use a mask to protect yourself from smoke, dust, or airborne debris, especially during wildfires or dust storms.\n";
+                break;
+            case "flashlight":
+                instructions += "- Use a flashlight to see in the dark, signal for help, or inspect your surroundings for hazards.\n";
+                break;
+            case "radio":
+                instructions += "- Use a radio to stay informed about emergency updates and instructions from authorities. Make sure it's tuned to a local emergency frequency.\n";
+                break;
+            case "rods":
+                instructions += "- Use rods to reinforce shelter structures or as tools for self-defense. They can also be used to probe uncertain terrain ahead of you.\n";
+                break;
+            default:
+                instructions += `- Utilize ${item} appropriately.\n`;
+        }
+    });
+    return instructions;
+}
+
+const chatOutput = document.getElementById('chat-output');
+const userInput = document.getElementById('user-input');
+
+function sendMessage() {
+    const userInput = document.getElementById('user-input');
+    const message = userInput.value.trim().toLowerCase();
+    if (!message) return;
+
+    addMessageToChat('User', message);
+
+    let response = getResponse(message);
+    addMessageToChat('⚛️', response.text, true);
+    playSpeechSynthesis(response.text);
+
+    userInput.value = '';
+    chatOutput.scrollTop = chatOutput.scrollHeight; // Scroll to the bottom
+}
+
+// Check if user mentioned items in surroundings
+
+function addMessageToChat(sender, message, isBot = false) {
+    const chatOutput = document.getElementById('chat-output');
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message', sender.toLowerCase());
+    messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+    if (isBot) {
+        messageElement.classList.add('bot-message');
+    }
+    chatOutput.appendChild(messageElement);
+}
+
+function deleteChat() {
+            chatOutput.innerHTML = '<p>Welcome to Raksha Samarthya! How can I assist you today?</p>';
+        }
+
+
+function playSpeechSynthesis(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = speechSynthesis.getVoices().find(voice => voice.name === 'Google UK English Female' || voice.name === 'Microsoft Hazel Desktop - English (Great Britain)');
+    speechSynthesis.speak(utterance);
+}
+if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/service-worker.js')
+                .then(function(registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch(function(error) {
+                    console.log('Service Worker registration failed:', error);
+                });
+            });
+        }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const chatbotSection = document.getElementById('chatbot');
+    const toggleButton = document.querySelector('.chatbot-toggle');
+    if (window.innerWidth <= 768) {
+        chatbotSection.style.display = 'none';
+        toggleButton.classList.add('active');
+    } else {
+        chatbotSection.style.display = 'block';
+        toggleButton.classList.remove('active');
+    }
+});
+        function addMessageToChat(sender, message, isBot = false) {
+            const chatOutput = document.getElementById('chat-output');
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', sender.toLowerCase());
+            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            if (isBot) {
+                messageElement.classList.add('bot-message');
+            }
+            chatOutput.appendChild(messageElement);
+        }
+
+        function deleteChat() {
+            chatOutput.innerHTML = '<p>Welcome to Raksha Samarthya! How can I assist you today?</p>';
+        }
+
+        function playSpeechSynthesis(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.voice = speechSynthesis.getVoices().find(voice => voice.name === 'Google UK English Female' || voice.name === 'Microsoft Hazel Desktop - English (Great Britain)');
+            speechSynthesis.speak(utterance);
+        }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch(error => {
+                    console.error('Service Worker registration failed:', error);
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatbotSection = document.getElementById('chatbot');
+            const toggleButton = document.querySelector('.chatbot-toggle');
+            if (window.innerWidth <= 768) {
+                chatbotSection.style.display = 'none';
+                toggleButton.classList.add('active');
+            } else {
+                chatbotSection.style.display = 'block';
+                toggleButton.classList.remove('active');
+            }
+        });
+
+// Event listener to handle Enter key press
+document.getElementById("user-input").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        sendMessage(); // Call sendMessage function on Enter key press
+    }
+});
+
+</script>
+</body>
+</html>

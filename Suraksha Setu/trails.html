@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raksha Samarthya</title>
+    <link rel="icon" type="image/png" href="croppedimage.png">
+    <link rel="manifest" href="manifest.json"> <!-- Include the manifest file -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.5rem;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* Light grey background */
+            color: #4a4a4a; /* Dark grey text color */
+            overflow-x: hidden; /* Ensure no horizontal overflow */
+        }
+
+        /* Button Container Styling */
+        .button-container {
+            position: absolute;
+            top: 2px;
+            right: 4%;
+            position: absolute; /* Added to enable top and right positioning */
+        }
+
+        #command-button {
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #2c3e50; /* Dark blue-grey button background */
+            color: #ecf0f1; /* Light grey text color */
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        #command-button:hover {
+            background-color: #34495e; /* Slightly lighter on hover */
+        }
+
+        #command-list {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            border: 1px solid #bdc3c7; /* Light grey border */
+            background-color: #ffffff; /* White background */
+            list-style-type: none;
+            padding: 10px;
+            width: 200px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+        }
+
+        #command-list li {
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        #command-list li:hover {
+            background-color: #f4f4f4; /* Light grey on hover */
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #3498db; /* Vibrant blue background */
+            color: #ffffff; /* White text color */
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 20px;
+            height: 10%;
+            position: relative;
+            border-bottom: 1px solid #2980b9; /* Darker blue border */
+            overflow: hidden; /* Ensure no overflow issues */
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.0rem;
+            letter-spacing: 1.5px;
+            position: absolute;
+            top: 15%;
+            left: 5%;
+            text-transform: uppercase;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 8px #ffffff, 0 0 16px #3498db, 0 0 24px #3498db; }
+            to { text-shadow: 0 0 16px #ffffff, 0 0 24px #3498db, 0 0 32px #3498db; }
+        }
+
+        /* Main Content Styling */
+        main {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 16px;
+            background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white background */
+            border: 1px solid #bdc3c7; /* Light grey border */
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+            padding-bottom: 12px; /* Adjust padding for footer space */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Chatbot Container Styling */
+        .chatbot-container {
+            background-color: #ffffff; /* White background */
+            border: 1px solid #bdc3c7; /* Light grey border */
+            border-radius: 12px;
+            padding: 16px;
+            max-width: 80%; /* Adjusted for mobile width */
+            margin: 16px auto;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Chat Output Styling */
+        .chat-output {
+            overflow-y: auto;
+            max-height: 220px;
+            padding: 12px;
+            border: 1px solid #bdc3c7; /* Light grey border */
+            border-radius: 8px;
+            background-color: #f5f5f5; /* Slightly grey background */
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        /* User Message Styling */
+        .user-message {
+            align-self: flex-end;
+            background-color: #2980b9; /* Blue background for user messages */
+            color: #ffffff; /* White text color */
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            max-width: 75%; /* Increased width for mobile */
+            word-wrap: break-word;
+        }
+
+        /* Bot Message Styling */
+        .bot-message {
+            align-self: flex-start;
+            background-color: #ecf0f1; /* Light grey background for bot messages */
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            max-width: 75%; /* Increased width for mobile */
+            word-wrap: break-word;
+        }
+
+        /* Chat Input Container Styling */
+        .chat-input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .chat-input {
+            width: calc(100% - 20px);
+            padding: 12px;
+            border: 1px solid #bdc3c7; /* Light grey border */
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+
+        /* Chat Button Container Styling */
+        .chat-btn-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .send-btn,
+        .delete-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .send-btn {
+            background-color: #3498db;
+            color: #ffffff;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: #ffffff;
+        }
+
+        /* Chatbot Toggle Styling */
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2980b9;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .chatbot-toggle.active {
+            display: block;
+        }
+
+        @media screen and (max-width: 375px) {
+            header h1 {
+                font-size: 1.4rem;
+            }
+
+            .chatbot-container {
+                margin: 10px auto;
+            }
+
+            .chat-input {
+                padding: 10px;
+            }
+
+            .send-btn, .delete-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .chat-btn-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .send-btn, .delete-btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .chat-output {
+                max-height: 180px;
+            }
+        }
+
+        .bot-message strong {
+            font-size: 1.4em;
+            filter: saturate(4.5);
+            filter: contrast(200%);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Raksha Samarthya</h1>
+        <div class="button-container">
+            <button id="command-button">Commands</button>
+            <ul id="command-list">
+                <li>Open Chatbot</li>
+                <li>Close Chatbot</li>
+                <li>Show Alert</li>
+                <li>Hide Alert</li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <div class="chatbot-container" id="chatbot-container">
+            <div class="chat-output" id="chat-output"></div>
+            <div class="chat-input-container">
+                <textarea class="chat-input" id="chat-input" placeholder="Type your message here..."></textarea>
+                <div class="chat-btn-container">
+                    <button class="send-btn" id="send-btn">Send</button>
+                    <button class="delete-btn" id="delete-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+        <button class="chatbot-toggle" id="chatbot-toggle">Open Chatbot</button>
+    </main>
+
+    <script>
+        const commandButton = document.getElementById("command-button");
+        const commandList = document.getElementById("command-list");
+        const chatbotContainer = document.getElementById("chatbot-container");
+        const chatbotToggle = document.getElementById("chatbot-toggle");
+        const sendBtn = document.getElementById("send-btn");
+        const deleteBtn = document.getElementById("delete-btn");
+        const chatOutput = document.getElementById("chat-output");
+        const chatInput = document.getElementById("chat-input");
+
+        commandButton.addEventListener("click", () => {
+            commandList.style.display = commandList.style.display === "none" ? "block" : "none";
+        });
+
+        chatbotToggle.addEventListener("click", () => {
+            if (chatbotContainer.style.display === "none" || chatbotContainer.style.display === "") {
+                chatbotContainer.style.display = "block";
+                chatbotToggle.textContent = "Close Chatbot";
+            } else {
+                chatbotContainer.style.display = "none";
+                chatbotToggle.textContent = "Open Chatbot";
+            }
+        });
+
+        sendBtn.addEventListener("click", () => {
+            const message = chatInput.value.trim();
+            if (message) {
+                addMessageToChat(message, "user");
+                chatInput.value = "";
+            }
+        });
+
+        deleteBtn.addEventListener("click", () => {
+            chatOutput.innerHTML = "";
+        });
+
+        function addMessageToChat(message, sender) {
+            const messageElement = document.createElement("div");
+            messageElement.classList.add(sender === "user" ? "user-message" : "bot-message");
+            messageElement.textContent = message;
+            chatOutput.appendChild(messageElement);
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+        }
+
+        // Service worker registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, error => {
+                    console.log('ServiceWorker registration failed: ', error);
+                });
+            });
+        }
+
+        // Prompting APK download
+        if (navigator.userAgent.match(/Android/i)) {
+            const apkPrompt = document.createElement("div");
+            apkPrompt.style.position = "fixed";
+            apkPrompt.style.bottom = "0";
+            apkPrompt.style.left = "0";
+            apkPrompt.style.width = "100%";
+            apkPrompt.style.backgroundColor = "#3498db";
+            apkPrompt.style.color = "#ffffff";
+            apkPrompt.style.padding = "16px";
+            apkPrompt.style.textAlign = "center";
+            apkPrompt.style.zIndex = "1000";
+            apkPrompt.innerHTML = `
+                <p>Download the Raksha Samarthya app for a better experience!</p>
+                <button onclick="app-release.apk'" style="background-color: #2c3e50; color: #ffffff; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer;">Download APK</button>
+                <button onclick="this.parentElement.style.display='none'" style="background-color: #e74c3c; color: #ffffff; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer;">Close</button>
+            `;
+            document.body.appendChild(apkPrompt);
+        }
+    </script>
+</body>
+</html>
