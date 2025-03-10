@@ -16,7 +16,8 @@ def expand_string(s):
 
 # Example usage
 input_string = "4a3b2c"
-print(expand_string(input_string))  # Output: aaaa
+#print(expand_string(input_string))  # Output: aaaa
+
 
 
 
