@@ -7,7 +7,7 @@
 """
 
 def main():
-    file = open(r"D:\GitHub\Python\python_practise\files\asl1.csv")
+    file = open(r"/Users/Arunkumar_Mathe/Documents/python_practise/files/asl1.csv")
     lines = file.readlines()
     for line in lines:
         print(line, end="")

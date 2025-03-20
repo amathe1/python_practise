@@ -1,0 +1,3 @@
+Hi Arun! 
+How are you ? 
+You are appending text to same file 
