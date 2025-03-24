@@ -15,7 +15,7 @@ def main():
 
     with open(filename, 'rb') as file:
         result = file.read(5)
-        print(type(result))
+        print(result)
 
 if __name__ == "__main__":
     main()
