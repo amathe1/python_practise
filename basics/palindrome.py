@@ -1,9 +1,15 @@
 """
 Write to check a palindrome
 
+Example :
+
+string1 = "12321"
+Reverse of this string is also same as itself. Hence it is palindrome.
+
 """
 
 def is_palindrome(strr1):
+    # This is a simple way to reverse a string
     strr2 = strr1[::-1]
     return strr2
 

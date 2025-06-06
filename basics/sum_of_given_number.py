@@ -10,9 +10,7 @@ def find_sum(strr):
 
 def main():
     number = input("Please enter a number : ")
-
-    strr = str(number)
-    sum_of_given_no = find_sum(strr)
+    sum_of_given_no = find_sum(number)
     print("Sum of give number is : ", sum_of_given_no)
 
 main()

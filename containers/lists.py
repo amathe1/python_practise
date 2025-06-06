@@ -26,6 +26,7 @@ def main():
     #Slicing a list, it will start with list2[0] & it won't print last item
     print(list2[0:2])
 """
+
 def main():
     list1 = [1, 2, 1, 2, 3, 4, 3, 4]
     #print(list(set(list1)))

@@ -24,6 +24,7 @@ main()
 # Factorial of zero is 1.
 # 0! = 1 
 
+
 def recursive_factorial(n):
     if n == 1:
         return n
@@ -43,3 +44,18 @@ def main():
         print(f"Factorial of given number {number} is : ", recursive_factorial(number) )
 
 main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
