@@ -14,4 +14,11 @@ list  : ordered, mutable, "in" is slow
 set   : not ordered, mutable, "in" is fast
 dict  : ordered, mutable
 
+Output :
+{1, 2, 3, 4}
+<class 'set'>
+{1, 2, 3, 5}
+True
+False
+
 """

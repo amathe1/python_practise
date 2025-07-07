@@ -21,7 +21,7 @@ def sets_exercise():
     print()
 
     # cubic numbers are not square numbers
-    print(cubic_numbers - square_numbers)
+    print(cubic_numbers.difference(square_numbers))
     print()
 
 def main():

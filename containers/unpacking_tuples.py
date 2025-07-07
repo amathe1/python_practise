@@ -20,6 +20,4 @@ def main():
     print(multple_fruits)
     print(type(multple_fruits)) # It will be a type of List
 
-
-
 main()

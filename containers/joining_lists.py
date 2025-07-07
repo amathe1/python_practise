@@ -5,7 +5,7 @@ def main():
     fruits1 = ["Mango", "Grapes", "Orange"]
     fruits2 = ["Papaya", "Apple"]
 
-    # As tuples are immutable, we can't add 2 tuples, insteaad it will create a new tuple after adding above two tuples
+    # As tuples are immutable, we can't add 2 tuples, instead it will create a new tuple after adding above two tuples
     # Hence 2 different referece ID's will pointed to 2 different tuple objects
     print(id(animals1))
     # animals1 = animals1 + animals2 can be written as below
