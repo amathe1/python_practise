@@ -12,7 +12,7 @@ Dict            {}            Yes (> 3.6)       Mutable                         
 Time complexity :
 ===============
 
-* If you want to lookup items by some item that you already got use a set or dict
+* If you want to lookup items by some item that you already got, use a set or dict
 * If you want to insert items at arbitary locations avoid using a list
 
 

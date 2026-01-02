@@ -26,7 +26,9 @@ def main():
     print('tuple_1 = ("X") ')
     print('print(tuple_1) ')
     tuple_1 = ("B", "A", "D")
+    print(id(tuple_1))
     tuple_1 = ("X") 
+    print(id(tuple_1))
     print(tuple_1) 
 
 
